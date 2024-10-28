@@ -10,14 +10,14 @@ class OptionsParserTest {
     @Test
     void testParseMethod() {
         // given
-        String[] validArguments = {"f", "b", "r", "l"};
-        String[] invalidArguments = {"a", "x", "v", "m", "y"};
-        String[] mixedArguments = {"a", "f", "f", "x", "y", "l", "z", "r", "p"};
+        final String[] validArguments = {"f", "b", "r", "l"};
+        final String[] invalidArguments = {"a", "x", "v", "m", "y"};
+        final String[] mixedArguments = {"a", "f", "f", "x", "y", "l", "z", "r", "p"};
 
-        MoveDirection forward = MoveDirection.FORWARD;
-        MoveDirection backward = MoveDirection.BACKWARD;
-        MoveDirection left = MoveDirection.LEFT;
-        MoveDirection right = MoveDirection.RIGHT;
+        final MoveDirection forward = MoveDirection.FORWARD;
+        final MoveDirection backward = MoveDirection.BACKWARD;
+        final MoveDirection left = MoveDirection.LEFT;
+        final MoveDirection right = MoveDirection.RIGHT;
 
         // when
         MoveDirection[] properResultValid = {forward, backward, right, left};

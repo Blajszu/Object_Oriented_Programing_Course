@@ -19,12 +19,7 @@ public enum MapDirection {
 
     @Override
     public String toString() {
-        return switch (this) {
-            case NORTH -> names[0];
-            case EAST -> names[1];
-            case SOUTH -> names[2];
-            case WEST -> names[3];
-        };
+        return names[this.ordinal()];
     }
 
     public MapDirection next() {
