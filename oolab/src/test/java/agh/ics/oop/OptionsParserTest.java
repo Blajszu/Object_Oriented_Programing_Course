@@ -1,8 +1,9 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,17 +21,17 @@ class OptionsParserTest {
         final MoveDirection right = MoveDirection.RIGHT;
 
         // when
-        MoveDirection[] properResultValid = {forward, backward, right, left};
-        MoveDirection[] properResultInvalid = {};
-        MoveDirection[] properResultMixed = {forward, forward, left, right};
+        List<MoveDirection> properResultValid = List.of(forward, backward, right, left);
+        List<MoveDirection> properResultInvalid = List.of();
+        List<MoveDirection> properResultMixed = List.of(forward, forward, left, right);
 
-        MoveDirection[] resultValid = OptionsParser.parse(validArguments);
-        MoveDirection[] resultInvalid = OptionsParser.parse(invalidArguments);
-        MoveDirection[] resultMixed = OptionsParser.parse(mixedArguments);
+        List<MoveDirection> resultValid = OptionsParser.parse(validArguments);
+        List<MoveDirection> resultInvalid = OptionsParser.parse(invalidArguments);
+        List<MoveDirection> resultMixed = OptionsParser.parse(mixedArguments);
 
         // then
-        assertArrayEquals(resultValid, properResultValid);
-        assertArrayEquals(resultInvalid, properResultInvalid);
-        assertArrayEquals(resultMixed, properResultMixed);
+        assertEquals(properResultValid, resultValid);
+        assertEquals(properResultInvalid, resultInvalid);
+        assertEquals(properResultMixed, resultMixed);
     }
 }
