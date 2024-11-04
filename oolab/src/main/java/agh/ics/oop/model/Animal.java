@@ -54,9 +54,7 @@ public class Animal {
                 break;
         }
 
-        if(
-            (newPosition.getX() >= LEFT_DOWN_MAP_CORNER.getX() && newPosition.getY() >= LEFT_DOWN_MAP_CORNER.getY()) &&
-            (newPosition.getX() <= RIGHT_UP_MAP_CORNER.getX() && newPosition.getY() <= RIGHT_UP_MAP_CORNER.getY())
-        ) currentPositionOnMap = newPosition;
+        if(newPosition.follows(LEFT_DOWN_MAP_CORNER) && newPosition.precedes(RIGHT_UP_MAP_CORNER))
+            currentPositionOnMap = newPosition;
     }
 }

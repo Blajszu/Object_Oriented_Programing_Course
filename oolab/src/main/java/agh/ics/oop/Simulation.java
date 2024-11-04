@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.Animal;
+import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
@@ -21,9 +22,30 @@ public class Simulation {
         }
     }
 
+    List<Vector2d> getAnimalsPositionsAfterSimulation() {
+        List<Vector2d> positions = new ArrayList<>();
+        for(Animal animal : animals) {
+            positions.add(animal.getCurrentPositionOnMap());
+        }
+
+        return positions;
+    }
+
+    List<MapDirection> getAnimalOrientationsAfterSimulation() {
+        List<MapDirection> orientations = new ArrayList<>();
+        for(Animal animal : animals) {
+            orientations.add(animal.getCurrentOrientation());
+        }
+
+        return orientations;
+    }
+
     public void run() {
         int numberOfAnimals = animals.size();
         int numberOfMoves = moves.size();
+
+        if(numberOfAnimals == 0)
+            return;
 
         for(int i = 0; i < numberOfMoves; i++) {
             Animal currentAnimal = animals.get(i % numberOfAnimals);

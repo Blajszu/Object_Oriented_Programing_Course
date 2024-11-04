@@ -10,17 +10,13 @@ public class OptionsParser {
         List<MoveDirection> result = new ArrayList<>();
 
         for (String dir : directions) {
-            MoveDirection res =  switch (dir) {
-                case "f" -> MoveDirection.FORWARD;
-                case "b" -> MoveDirection.BACKWARD;
-                case "r" -> MoveDirection.RIGHT;
-                case "l" -> MoveDirection.LEFT;
-                default -> null;
-            };
-            if(res != null)
-                result.add(res);
+            switch (dir) {
+                case "f" -> result.add(MoveDirection.FORWARD);
+                case "b" -> result.add(MoveDirection.BACKWARD);
+                case "r" -> result.add(MoveDirection.RIGHT);
+                case "l" -> result.add(MoveDirection.LEFT);
+            }
         }
-
         return result;
     }
 }
