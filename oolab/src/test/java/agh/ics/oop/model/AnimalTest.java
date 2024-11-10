@@ -21,9 +21,10 @@ class AnimalTest {
     public void rotateLeftOnce() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, validator);
 
         //then
         assertEquals(MapDirection.WEST, animal.getCurrentOrientation());
@@ -33,10 +34,11 @@ class AnimalTest {
     public void rotateLeftTwice() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.LEFT, validator);
 
         //then
         assertEquals(MapDirection.SOUTH, animal.getCurrentOrientation());
@@ -46,11 +48,12 @@ class AnimalTest {
     public void rotateLeftThreeTimes() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.LEFT, validator);
 
         //then
         assertEquals(MapDirection.EAST, animal.getCurrentOrientation());
@@ -60,12 +63,13 @@ class AnimalTest {
     public void rotateLeftFourTimes() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.LEFT, validator);
 
         //then
         assertEquals(MapDirection.NORTH, animal.getCurrentOrientation());
@@ -75,9 +79,10 @@ class AnimalTest {
     public void rotateRightOnce() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, validator);
 
         //then
         assertEquals(MapDirection.EAST, animal.getCurrentOrientation());
@@ -87,10 +92,11 @@ class AnimalTest {
     public void rotateRightTwice() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
 
         //then
         assertEquals(MapDirection.SOUTH, animal.getCurrentOrientation());
@@ -100,11 +106,12 @@ class AnimalTest {
     public void rotateRightThreeTimes() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
 
         //then
         assertEquals(MapDirection.WEST, animal.getCurrentOrientation());
@@ -114,12 +121,13 @@ class AnimalTest {
     public void rotateRightFourTimes() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
 
         //then
         assertEquals(MapDirection.NORTH, animal.getCurrentOrientation());
@@ -131,6 +139,7 @@ class AnimalTest {
     public void isInitialPositionCorrect() {
         //when
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
         assertEquals(new Vector2d(2, 2), animal.getCurrentPosition());
@@ -140,9 +149,10 @@ class AnimalTest {
     public void moveForwardNorth() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(2, 3), animal.getCurrentPosition());
@@ -152,9 +162,10 @@ class AnimalTest {
     public void moveBackwardNorth() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.BACKWARD, validator);
 
         //then
         assertEquals(new Vector2d(2, 1), animal.getCurrentPosition());
@@ -164,10 +175,11 @@ class AnimalTest {
     public void moveForwardEast() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(3, 2), animal.getCurrentPosition());
@@ -177,10 +189,11 @@ class AnimalTest {
     public void moveBackwardEast() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.BACKWARD, validator);
 
         //then
         assertEquals(new Vector2d(1, 2), animal.getCurrentPosition());
@@ -190,11 +203,12 @@ class AnimalTest {
     public void moveForwardSouth() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(2, 1), animal.getCurrentPosition());
@@ -204,11 +218,12 @@ class AnimalTest {
     public void moveBackwardSouth() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.BACKWARD, validator);
 
         //then
         assertEquals(new Vector2d(2, 3), animal.getCurrentPosition());
@@ -218,10 +233,11 @@ class AnimalTest {
     public void moveForwardWest() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(1, 2), animal.getCurrentPosition());
@@ -231,10 +247,11 @@ class AnimalTest {
     public void moveBackwardWest() {
         //given
         Animal animal = new Animal();
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.BACKWARD, validator);
 
         //then
         assertEquals(new Vector2d(3, 2), animal.getCurrentPosition());
@@ -246,9 +263,10 @@ class AnimalTest {
     public void moveBeyondMapLimitsNorth() {
         //given
         Animal animal = new Animal(new Vector2d(2, 4));
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(2, 4), animal.getCurrentPosition());
@@ -258,11 +276,12 @@ class AnimalTest {
     public void moveBeyondMapLimitsSouth() {
         //given
         Animal animal = new Animal(new Vector2d(2, 0));
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(2, 0), animal.getCurrentPosition());
@@ -272,10 +291,11 @@ class AnimalTest {
     public void moveBeyondMapLimitsEast() {
         //given
         Animal animal = new Animal(new Vector2d(4, 2));
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(4, 2), animal.getCurrentPosition());
@@ -285,10 +305,11 @@ class AnimalTest {
     public void moveBeyondMapLimitsWest() {
         //given
         Animal animal = new Animal(new Vector2d(0, 2));
+        MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
 
         //then
         assertEquals(new Vector2d(0, 2), animal.getCurrentPosition());
