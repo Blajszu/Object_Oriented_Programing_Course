@@ -1,8 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.MapDirection;
+import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,8 +18,8 @@ public class SimulationTest {
                 MoveDirection.RIGHT, MoveDirection.RIGHT,
                 MoveDirection.FORWARD, MoveDirection.FORWARD
         );
-        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(2, 2));
-        Simulation simulation = new Simulation(positions, directions);
+        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 3));
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
 
         // When
         simulation.run();
@@ -49,7 +47,7 @@ public class SimulationTest {
                 MoveDirection.BACKWARD
         );
         List<Vector2d> positions = List.of(new Vector2d(0, 0));
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
 
         // When
         simulation.run();
@@ -73,7 +71,7 @@ public class SimulationTest {
                 MoveDirection.FORWARD, MoveDirection.FORWARD
         );
         List<Vector2d> positions = List.of(new Vector2d(4, 4), new Vector2d(0, 0));
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
 
         // When
         simulation.run();
@@ -100,7 +98,7 @@ public class SimulationTest {
         List<Vector2d> positions = List.of(
                 new Vector2d(1, 1), new Vector2d(2, 2), new Vector2d(3, 3)
         );
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
 
         // When
         simulation.run();
@@ -123,7 +121,7 @@ public class SimulationTest {
         // Given
         List<MoveDirection> directions = List.of();
         List<Vector2d> positions = List.of(new Vector2d(2, 2));
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
 
         // When
         simulation.run();
@@ -144,7 +142,7 @@ public class SimulationTest {
                 MoveDirection.BACKWARD
         );
         List<Vector2d> positions = List.of();
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
 
         // When
         simulation.run();
@@ -154,5 +152,23 @@ public class SimulationTest {
         // Then
         assertEquals(0, animalPositions.size());
         assertEquals(0, animalOrientations.size());
+    }
+
+    @Test
+    void simulationWithFollowingPositions() {
+        //given
+        List<MoveDirection> directions = List.of(MoveDirection.FORWARD, MoveDirection.FORWARD);
+        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(2, 1));
+
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(5, 5));
+
+        //when
+        simulation.run();
+
+        List<Vector2d> animalPositions = simulation.getAnimalsPositionsAfterSimulation();
+
+        //then
+        assertEquals(new Vector2d(2, 3), animalPositions.getFirst());
+        assertEquals(new Vector2d(2,2), animalPositions.get(1));
     }
 }
