@@ -26,14 +26,19 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Pozycja na mapie: %s, Orientacja: %s".formatted(currentPosition.toString(), currentOrientation.toString());
+        return switch (currentOrientation) {
+            case NORTH -> "^";
+            case SOUTH -> "v";
+            case EAST -> ">";
+            case WEST -> "<";
+        };
     }
 
     public boolean isAt(Vector2d position) {
         return currentPosition.equals(position);
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction, MoveValidator validator) {
         if(direction == null)
             return;
 
@@ -54,7 +59,7 @@ public class Animal {
                 break;
         }
 
-        if(newPosition.follows(LEFT_DOWN_MAP_CORNER) && newPosition.precedes(RIGHT_UP_MAP_CORNER))
+        if(validator.canMoveTo(newPosition))
             currentPosition = newPosition;
     }
 }
