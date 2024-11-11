@@ -2,10 +2,9 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class RectangularMap implements WorldMap {
+public class RectangularMap implements WorldMap<Animal, Vector2d> {
     private final Map<Vector2d, Animal> animalsAtPositions = new HashMap<>();
 
     private final Vector2d leftDownMapCorner = new Vector2d(0,0);
