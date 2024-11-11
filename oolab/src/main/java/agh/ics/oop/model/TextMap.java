@@ -3,7 +3,7 @@ package agh.ics.oop.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TextMap implements WorldMap<String, Integer> {
+public class TextMap implements WorldNumberPositionMap<String, Integer> {
 
     private final List<String> textAtPositions = new LinkedList<>();
 
