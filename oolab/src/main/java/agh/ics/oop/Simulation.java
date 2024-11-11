@@ -5,55 +5,35 @@ import agh.ics.oop.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
+public class Simulation<T, P> {
 
-    private final List<Animal> animals;
+    private final List<T> objectsOnMap;
     private final List<MoveDirection> moves;
-    private final WorldMap worldMap;
+    private final WorldMap<T, P> worldMap;
 
-    public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moveDirections, WorldMap map) {
+    public Simulation(List<T> objects, List<MoveDirection> moveDirections, WorldMap<T, P> map) {
+
         moves = moveDirections;
-        animals = new ArrayList<>();
         worldMap = map;
+        objectsOnMap = new ArrayList<>();
 
-        for(Vector2d position : animalPositions) {
-            Animal newAnimal = new Animal(position);
-
-            if(map.place(newAnimal)) {
-                animals.add(newAnimal);
-            }
-        }
-    }
-
-    List<Vector2d> getAnimalsPositionsAfterSimulation() {
-        List<Vector2d> positions = new ArrayList<>();
-        for(Animal animal : animals) {
-            positions.add(animal.getCurrentPosition());
-        }
-
-        return positions;
-    }
-
-    List<MapDirection> getAnimalOrientationsAfterSimulation() {
-        List<MapDirection> orientations = new ArrayList<>();
-        for(Animal animal : animals) {
-            orientations.add(animal.getCurrentOrientation());
-        }
-
-        return orientations;
+        objects.forEach(object -> {
+            if(map.place(object))
+                objectsOnMap.add(object);
+        });
     }
 
     public void run() {
-        int numberOfAnimals = animals.size();
+        int numberOfObjects = objectsOnMap.size();
         int numberOfMoves = moves.size();
 
-        if(numberOfAnimals == 0)
+        if(numberOfObjects == 0)
             return;
 
         for(int i = 0; i < numberOfMoves; i++) {
-            Animal currentAnimal = animals.get(i % numberOfAnimals);
+            T currentObject = objectsOnMap.get(i % numberOfObjects);
 
-            worldMap.move(currentAnimal, moves.get(i));
+            worldMap.move(currentObject, moves.get(i));
             System.out.print(worldMap);
         }
     }
