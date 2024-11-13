@@ -20,7 +20,7 @@ public class Animal {
         return currentOrientation;
     }
 
-    public Vector2d getCurrentPosition() {
+    public Vector2d getPosition() {
         return currentPosition;
     }
 

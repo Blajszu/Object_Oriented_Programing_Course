@@ -142,7 +142,7 @@ class AnimalTest {
         MoveValidator validator = new RectangularMap(5,5);
 
         //when
-        assertEquals(new Vector2d(2, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 2), animal.getPosition());
     }
 
     @Test
@@ -155,7 +155,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(2, 3), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 3), animal.getPosition());
     }
 
     @Test
@@ -168,7 +168,7 @@ class AnimalTest {
         animal.move(MoveDirection.BACKWARD, validator);
 
         //then
-        assertEquals(new Vector2d(2, 1), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 1), animal.getPosition());
     }
 
     @Test
@@ -182,7 +182,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(3, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(3, 2), animal.getPosition());
     }
 
     @Test
@@ -196,7 +196,7 @@ class AnimalTest {
         animal.move(MoveDirection.BACKWARD, validator);
 
         //then
-        assertEquals(new Vector2d(1, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(1, 2), animal.getPosition());
     }
 
     @Test
@@ -211,7 +211,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(2, 1), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 1), animal.getPosition());
     }
 
     @Test
@@ -226,7 +226,7 @@ class AnimalTest {
         animal.move(MoveDirection.BACKWARD, validator);
 
         //then
-        assertEquals(new Vector2d(2, 3), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 3), animal.getPosition());
     }
 
     @Test
@@ -240,7 +240,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(1, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(1, 2), animal.getPosition());
     }
 
     @Test
@@ -254,7 +254,7 @@ class AnimalTest {
         animal.move(MoveDirection.BACKWARD, validator);
 
         //then
-        assertEquals(new Vector2d(3, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(3, 2), animal.getPosition());
     }
 
     //Tests for Map Borders
@@ -269,7 +269,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(2, 4), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 4), animal.getPosition());
     }
 
     @Test
@@ -284,7 +284,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(2, 0), animal.getCurrentPosition());
+        assertEquals(new Vector2d(2, 0), animal.getPosition());
     }
 
     @Test
@@ -298,7 +298,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(4, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(4, 2), animal.getPosition());
     }
 
     @Test
@@ -312,6 +312,6 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD, validator);
 
         //then
-        assertEquals(new Vector2d(0, 2), animal.getCurrentPosition());
+        assertEquals(new Vector2d(0, 2), animal.getPosition());
     }
 }
