@@ -5,14 +5,14 @@ public class Animal {
     private static final Vector2d RIGHT_UP_MAP_CORNER = new Vector2d(4,4);
     
     private MapDirection currentOrientation;
-    private Vector2d currentPositionOnMap;
+    private Vector2d currentPosition;
 
     public Animal() {
         this(new Vector2d(2, 2));
     }
 
     public Animal(Vector2d position) {
-        currentPositionOnMap = position;
+        currentPosition = position;
         currentOrientation = MapDirection.NORTH;
     }
 
@@ -20,24 +20,29 @@ public class Animal {
         return currentOrientation;
     }
 
-    public Vector2d getCurrentPositionOnMap() {
-        return currentPositionOnMap;
+    public Vector2d getCurrentPosition() {
+        return currentPosition;
     }
 
     @Override
     public String toString() {
-        return "Pozycja na mapie: %s, Orientacja: %s".formatted(currentPositionOnMap.toString(), currentOrientation.toString());
+        return switch (currentOrientation) {
+            case NORTH -> "^";
+            case SOUTH -> "v";
+            case EAST -> ">";
+            case WEST -> "<";
+        };
     }
 
     public boolean isAt(Vector2d position) {
-        return currentPositionOnMap.equals(position);
+        return currentPosition.equals(position);
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction, MoveValidator validator) {
         if(direction == null)
             return;
 
-        Vector2d newPosition = currentPositionOnMap;
+        Vector2d newPosition = currentPosition;
 
         switch (direction) {
             case MoveDirection.LEFT:
@@ -47,14 +52,14 @@ public class Animal {
                 currentOrientation = currentOrientation.next();
                 break;
             case MoveDirection.FORWARD:
-                newPosition = currentPositionOnMap.add(currentOrientation.toUnitVector());
+                newPosition = currentPosition.add(currentOrientation.toUnitVector());
                 break;
             case MoveDirection.BACKWARD:
-                newPosition = currentPositionOnMap.subtract(currentOrientation.toUnitVector());
+                newPosition = currentPosition.subtract(currentOrientation.toUnitVector());
                 break;
         }
 
-        if(newPosition.follows(LEFT_DOWN_MAP_CORNER) && newPosition.precedes(RIGHT_UP_MAP_CORNER))
-            currentPositionOnMap = newPosition;
+        if(validator.canMoveTo(newPosition))
+            currentPosition = newPosition;
     }
 }
