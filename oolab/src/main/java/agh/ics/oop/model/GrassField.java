@@ -20,6 +20,9 @@ public class GrassField implements WorldMap {
         visualizer = new MapVisualizer(this);
         Random random = new Random();
 
+        //ONLY FOR TESTS
+        random.setSeed(123456789);
+
         while(grassOnMap.size() < numberOfGrassPieces) {
             int x = random.nextInt((int) sqrt(numberOfGrassPieces * 10));
             int y = random.nextInt((int) sqrt(numberOfGrassPieces * 10));
