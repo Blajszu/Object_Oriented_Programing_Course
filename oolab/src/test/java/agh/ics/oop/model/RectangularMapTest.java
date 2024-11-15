@@ -131,7 +131,7 @@ class RectangularMapTest {
         map.place(animal1);
 
         //when
-        Animal result = map.objectAt(new Vector2d(2, 2));
+        WorldElement result = map.objectAt(new Vector2d(2, 2));
 
         //then
         assertEquals(animal1, result);
@@ -143,7 +143,7 @@ class RectangularMapTest {
         RectangularMap map = new RectangularMap(5, 5);
 
         //when
-        Animal result = map.objectAt(new Vector2d(4, 4));
+        WorldElement result = map.objectAt(new Vector2d(4, 4));
 
         //then
         assertNull(result);
