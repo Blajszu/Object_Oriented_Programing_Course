@@ -1,23 +1,15 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.util.MapVisualizer;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Math.sqrt;
 
-public class GrassField implements WorldMap {
+public class GrassField extends AbstractWorldMap {
 
     private final Map<Vector2d, Grass> grassOnMap = new HashMap<>();
-    private final Map<Vector2d, Animal> animalsOnMap = new HashMap<>();
-
-    private final MapVisualizer visualizer;
 
     public GrassField(int numberOfGrassPieces) {
-
-        visualizer = new MapVisualizer(this);
+        
         Random random = new Random();
 
         //ONLY FOR TESTS
@@ -36,39 +28,9 @@ public class GrassField implements WorldMap {
     }
 
     @Override
-    public boolean place(Animal animal) {
-        Vector2d position = animal.getPosition();
-
-        if (canMoveTo(position)) {
-            animalsOnMap.put(position, animal);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void move(Animal animal, MoveDirection direction) {
-        if (animal == null || !animalsOnMap.containsValue(animal))
-            return;
-
-        Vector2d oldPosition = animal.getPosition();
-        animal.move(direction, this);
-
-        if(!oldPosition.equals(animal.getPosition())) {
-            animalsOnMap.remove(oldPosition);
-            animalsOnMap.put(animal.getPosition(), animal);
-        }
-    }
-
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        return objectAt(position) != null;
-    }
-
-    @Override
     public WorldElement objectAt(Vector2d position) {
 
-        Animal animal = animalsOnMap.get(position);
+        WorldElement animal = super.objectAt(position);
         if(animal == null)
             return grassOnMap.get(position);
 
@@ -76,8 +38,11 @@ public class GrassField implements WorldMap {
     }
 
     @Override
-    public boolean canMoveTo(Vector2d position) {
-        return !animalsOnMap.containsKey(position);
+    public List<WorldElement> getElements() {
+        List<WorldElement> result = super.getElements();
+        result.addAll(grassOnMap.values());
+
+        return result;
     }
 
     @Override
