@@ -88,7 +88,6 @@ class GrassFieldTest {
 
         //when
         boolean result = map.canMoveTo(grassPosition);
-        System.out.println(map);
 
         //then
         assertTrue(result);
@@ -114,7 +113,7 @@ class GrassFieldTest {
     void isOccupiedWhenPositionIsOccupiedByGrass() {
         //given
         GrassField map = new GrassField(1);
-        Vector2d grassPosition = new Vector2d(1, 0);
+        Vector2d grassPosition = new Vector2d(2, 1);
 
         //when
         boolean result = map.isOccupied(grassPosition);
@@ -155,12 +154,10 @@ class GrassFieldTest {
     void objectAtWhenPositionIsOccupiedByGrass() {
         //given
         GrassField map = new GrassField(1);
-        System.out.println(map);
-        Vector2d grassPosition = new Vector2d(1,0);
+        Vector2d grassPosition = new Vector2d(2,1);
 
         //when
         WorldElement result = map.objectAt(grassPosition);
-        System.out.println(map);
 
         //then
         assertInstanceOf(Grass.class, result);

@@ -50,6 +50,7 @@ class vectorIterator<V> implements Iterator<Vector2d> {
 
     public vectorIterator(RandomPositionGenerator generator) {
         this.generator = generator;
+        random.setSeed(123456789);
     }
 
     @Override
