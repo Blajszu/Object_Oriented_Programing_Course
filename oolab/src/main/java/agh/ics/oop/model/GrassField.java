@@ -9,21 +9,11 @@ public class GrassField extends AbstractWorldMap {
     private final Map<Vector2d, Grass> grassOnMap = new HashMap<>();
 
     public GrassField(int numberOfGrassPieces) {
-        
-        Random random = new Random();
 
-        //ONLY FOR TESTS
-        random.setSeed(123456789);
+        RandomPositionGenerator generator = new RandomPositionGenerator((int) sqrt(numberOfGrassPieces * 10), (int) sqrt(numberOfGrassPieces * 10), numberOfGrassPieces);
 
-        while(grassOnMap.size() < numberOfGrassPieces) {
-            int x = random.nextInt((int) sqrt(numberOfGrassPieces * 10));
-            int y = random.nextInt((int) sqrt(numberOfGrassPieces * 10));
-
-            Vector2d position = new Vector2d(x, y);
-
-            if(!grassOnMap.containsKey(position)) {
-                grassOnMap.put(new Vector2d(x, y), new Grass(position));
-            }
+        for(Vector2d grassPosition : generator) {
+            grassOnMap.put(grassPosition, new Grass(grassPosition));
         }
     }
 
