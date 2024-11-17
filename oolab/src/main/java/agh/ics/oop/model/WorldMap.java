@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -42,5 +43,5 @@ public interface WorldMap extends MoveValidator {
      */
     WorldElement objectAt(Vector2d position);
 
-    List<WorldElement> getElements();
+    Collection<WorldElement> getElements();
 }

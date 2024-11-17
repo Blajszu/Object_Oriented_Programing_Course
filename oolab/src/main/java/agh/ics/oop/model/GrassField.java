@@ -28,8 +28,8 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    public List<WorldElement> getElements() {
-        List<WorldElement> result = super.getElements();
+    public Collection<WorldElement> getElements() {
+        Collection<WorldElement> result = super.getElements();
         result.addAll(grassOnMap.values());
 
         return result;
@@ -37,6 +37,11 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public String toString() {
+
+        if(animalsOnMap.isEmpty() && grassOnMap.isEmpty()) {
+            return visualizer.draw(new Vector2d(0,0), new Vector2d(0,0));
+        }
+
         Vector2d leftDown = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
         Vector2d rightUp = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
 

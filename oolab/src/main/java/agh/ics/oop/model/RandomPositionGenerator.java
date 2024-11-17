@@ -20,55 +20,49 @@ public class RandomPositionGenerator implements Iterable<Vector2d> {
         }
     }
 
-    public int getNumberOfGrass() {
-        return numberOfGrass;
-    }
-
-    public int[] getListOfNumbers() {
-        return listOfNumbers;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     @Override
     public Iterator<Vector2d> iterator() {
-        return new vectorIterator<Vector2d>(this);
+        return new vectorIterator<Vector2d>(listOfNumbers, numberOfGrass, width, height);
     }
 }
 
 class vectorIterator<V> implements Iterator<Vector2d> {
 
-    private final RandomPositionGenerator generator;
     private int howManyElements = 0;
     private final Random random = new Random();
 
-    public vectorIterator(RandomPositionGenerator generator) {
-        this.generator = generator;
+    private final int[] listOfNumbers;
+    private final int numberOfGrass;
+    private final int width;
+    private final int height;
+
+    public vectorIterator(int[] listOfNumbers, int numberOfGrass, int width, int height) {
+
+        //FOR TESTS
         random.setSeed(123456789);
+
+        this.listOfNumbers = listOfNumbers;
+        this.numberOfGrass = numberOfGrass;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public boolean hasNext() {
-        return howManyElements < generator.getNumberOfGrass();
+        return howManyElements < numberOfGrass;
     }
 
     @Override
     public Vector2d next() {
 
-        int index = random.nextInt((generator.getHeight() * generator.getWidth()) - howManyElements);
-        int element = generator.getListOfNumbers()[index];
+        int index = random.nextInt((height * width) - howManyElements);
+        int element = listOfNumbers[index];
 
-        int x = element / generator.getWidth();
-        int y = element % generator.getHeight();
+        int x = element / width;
+        int y = element % height;
 
-        generator.getListOfNumbers()[index] = generator.getListOfNumbers()[(generator.getHeight() * generator.getWidth()) - howManyElements -1];
-        generator.getListOfNumbers()[(generator.getHeight() * generator.getWidth()) - howManyElements - 1] = element;
+        listOfNumbers[index] = listOfNumbers[(height * width) - howManyElements -1];
+        listOfNumbers[(height * width) - howManyElements - 1] = element;
 
         howManyElements++;
         return new Vector2d(x, y);
