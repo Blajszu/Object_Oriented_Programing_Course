@@ -28,7 +28,7 @@ public class Simulation {
     List<Vector2d> getAnimalsPositionsAfterSimulation() {
         List<Vector2d> positions = new ArrayList<>();
         for(Animal animal : animals) {
-            positions.add(animal.getCurrentPosition());
+            positions.add(animal.getPosition());
         }
 
         return positions;

@@ -131,7 +131,7 @@ class RectangularMapTest {
         map.place(animal1);
 
         //when
-        Animal result = map.objectAt(new Vector2d(2, 2));
+        WorldElement result = map.objectAt(new Vector2d(2, 2));
 
         //then
         assertEquals(animal1, result);
@@ -143,7 +143,7 @@ class RectangularMapTest {
         RectangularMap map = new RectangularMap(5, 5);
 
         //when
-        Animal result = map.objectAt(new Vector2d(4, 4));
+        WorldElement result = map.objectAt(new Vector2d(4, 4));
 
         //then
         assertNull(result);
@@ -163,7 +163,7 @@ class RectangularMapTest {
         map.move(animal1, MoveDirection.FORWARD);
 
         //then
-        assertEquals(new Vector2d(3, 2), animal1.getCurrentPosition());
+        assertEquals(new Vector2d(3, 2), animal1.getPosition());
         assertEquals(animal1, map.objectAt(new Vector2d(3, 2)));
         assertNull(map.objectAt(new Vector2d(2, 2)));
     }
@@ -181,7 +181,7 @@ class RectangularMapTest {
         map.move(animal1, MoveDirection.FORWARD);
 
         //then
-        assertEquals(new Vector2d(2, 4), animal1.getCurrentPosition());
+        assertEquals(new Vector2d(2, 4), animal1.getPosition());
     }
 
     @Test
@@ -198,8 +198,8 @@ class RectangularMapTest {
         map.move(animal1, MoveDirection.FORWARD);
         map.move(animal2, MoveDirection.FORWARD);
 
-        assertEquals(new Vector2d(2,3), animal1.getCurrentPosition());
-        assertEquals(new Vector2d(2,2), animal2.getCurrentPosition());
+        assertEquals(new Vector2d(2,3), animal1.getPosition());
+        assertEquals(new Vector2d(2,2), animal2.getPosition());
     }
 
     // TEST WYŚWIETLANIA MAPY

@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-public class Animal {
+public class Animal implements WorldElement {
     private static final Vector2d LEFT_DOWN_MAP_CORNER = new Vector2d(0,0);
     private static final Vector2d RIGHT_UP_MAP_CORNER = new Vector2d(4,4);
     
@@ -20,7 +20,7 @@ public class Animal {
         return currentOrientation;
     }
 
-    public Vector2d getCurrentPosition() {
+    public Vector2d getPosition() {
         return currentPosition;
     }
 
