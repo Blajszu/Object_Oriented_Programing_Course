@@ -58,7 +58,7 @@ class VectorIterator<V> implements Iterator<Vector2d> {
         int x = element / width;
         int y = element % width;
 
-        listOfNumbers[index] = listOfNumbers[(height * width) - howManyElements -1];
+        listOfNumbers[index] = listOfNumbers[(height * width) - howManyElements - 1];
 
         howManyElements++;
         return new Vector2d(x, y);

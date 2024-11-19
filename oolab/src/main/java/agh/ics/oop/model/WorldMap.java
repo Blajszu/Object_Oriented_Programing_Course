@@ -3,7 +3,6 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.util.IncorrectPositionException;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -17,7 +16,7 @@ public interface WorldMap extends MoveValidator {
      * Place a animal on the map.
      *
      * @param animal The animal to place on the map.
-     * @return True if the animal was placed. The animal cannot be placed if the move is not valid.
+     * @throws IncorrectPositionException when animal position is incorrect to place it on the map
      */
     void place(Animal animal) throws IncorrectPositionException;
 
