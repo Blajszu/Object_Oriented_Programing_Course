@@ -58,27 +58,4 @@ public class GrassField extends AbstractWorldMap {
 
         return new Boundary(leftDown, rightUp);
     }
-
-    @Override
-    public String toString() {
-
-        if(animalsOnMap.isEmpty() && grassOnMap.isEmpty()) {
-            return visualizer.draw(new Vector2d(0,0), new Vector2d(0,0));
-        }
-
-        Vector2d leftDown = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        Vector2d rightUp = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
-
-        for (Vector2d position : animalsOnMap.keySet()) {
-            leftDown = leftDown.lowerLeft(position);
-            rightUp = rightUp.upperRight(position);
-        }
-
-        for (Vector2d position : grassOnMap.keySet()) {
-            leftDown = leftDown.lowerLeft(position);
-            rightUp = rightUp.upperRight(position);
-        }
-
-        return visualizer.draw(leftDown, rightUp);
-    }
 }

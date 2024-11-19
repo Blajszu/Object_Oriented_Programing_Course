@@ -60,4 +60,10 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     public abstract Boundary getCurrentBounds();
+
+    @Override
+    public String toString() {
+        Boundary currentBounds = getCurrentBounds();
+        return visualizer.draw(currentBounds.lowerLeft(), currentBounds.upperRight());
+    }
 }

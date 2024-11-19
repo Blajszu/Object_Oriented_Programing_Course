@@ -23,9 +23,4 @@ public class RectangularMap extends AbstractWorldMap {
     public Boundary getCurrentBounds() {
         return new Boundary(leftDownMapCorner, rightUpMapCorner);
     }
-
-    @Override
-    public String toString() {
-        return visualizer.draw(leftDownMapCorner, rightUpMapCorner);
-    }
 }
