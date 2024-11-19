@@ -59,7 +59,6 @@ public class Simulation {
             Animal currentAnimal = animals.get(i % numberOfAnimals);
 
             worldMap.move(currentAnimal, moves.get(i));
-            System.out.print(worldMap);
         }
     }
 }
