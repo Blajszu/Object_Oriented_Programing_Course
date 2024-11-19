@@ -38,9 +38,6 @@ class VectorIterator<V> implements Iterator<Vector2d> {
 
     public VectorIterator(int[] listOfNumbers, int numberOfGrass, int width, int height) {
 
-        //FOR TESTS
-        random.setSeed(123456789);
-
         this.listOfNumbers = listOfNumbers;
         this.numberOfGrass = numberOfGrass;
         this.width = width;
