@@ -22,11 +22,11 @@ public class RandomPositionGenerator implements Iterable<Vector2d> {
 
     @Override
     public Iterator<Vector2d> iterator() {
-        return new vectorIterator<Vector2d>(listOfNumbers, numberOfGrass, width, height);
+        return new VectorIterator<Vector2d>(listOfNumbers, numberOfGrass, width, height);
     }
 }
 
-class vectorIterator<V> implements Iterator<Vector2d> {
+class VectorIterator<V> implements Iterator<Vector2d> {
 
     private int howManyElements = 0;
     private final Random random = new Random();
@@ -36,7 +36,7 @@ class vectorIterator<V> implements Iterator<Vector2d> {
     private final int width;
     private final int height;
 
-    public vectorIterator(int[] listOfNumbers, int numberOfGrass, int width, int height) {
+    public VectorIterator(int[] listOfNumbers, int numberOfGrass, int width, int height) {
 
         //FOR TESTS
         random.setSeed(123456789);
@@ -59,10 +59,9 @@ class vectorIterator<V> implements Iterator<Vector2d> {
         int element = listOfNumbers[index];
 
         int x = element / width;
-        int y = element % height;
+        int y = element % width;
 
         listOfNumbers[index] = listOfNumbers[(height * width) - howManyElements -1];
-        listOfNumbers[(height * width) - howManyElements - 1] = element;
 
         howManyElements++;
         return new Vector2d(x, y);
