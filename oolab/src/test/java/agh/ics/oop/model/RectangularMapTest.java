@@ -242,6 +242,6 @@ class RectangularMapTest {
         //then
         String expectedMap = " y\\x  0 1 2 3 4\r\n  5: -----------\r\n  4: | | | | | |\r\n  3: | | | | | |\r\n  2: | | |^| | |\r\n  1: | |^| | | |\r\n  0: | | | | | |\r\n -1: -----------\r\n";
 
-        assertEquals(map.toString(), expectedMap);
+        assertEquals(expectedMap, map.toString());
     }
 }
