@@ -12,8 +12,7 @@ class OptionsParserTest {
     void testParseMethod() {
         // given
         final String[] validArguments = {"f", "b", "r", "l"};
-        final String[] invalidArguments = {"a", "x", "v", "m", "y"};
-        final String[] mixedArguments = {"a", "f", "f", "x", "y", "l", "z", "r", "p"};
+        final String[] mixedArguments = {"f", "f", "l", "r"};
 
         final MoveDirection forward = MoveDirection.FORWARD;
         final MoveDirection backward = MoveDirection.BACKWARD;
@@ -22,16 +21,24 @@ class OptionsParserTest {
 
         // when
         List<MoveDirection> properResultValid = List.of(forward, backward, right, left);
-        List<MoveDirection> properResultInvalid = List.of();
         List<MoveDirection> properResultMixed = List.of(forward, forward, left, right);
 
         List<MoveDirection> resultValid = OptionsParser.parse(validArguments);
-        List<MoveDirection> resultInvalid = OptionsParser.parse(invalidArguments);
         List<MoveDirection> resultMixed = OptionsParser.parse(mixedArguments);
 
         // then
         assertEquals(properResultValid, resultValid);
-        assertEquals(properResultInvalid, resultInvalid);
         assertEquals(properResultMixed, resultMixed);
+    }
+
+    @Test
+    void testParseMethodWithInvalidArguments() {
+        // given
+        final String[] invalidArguments = {"a", "x", "v", "m", "y"};
+        final String[] mixedArgumentsWithInvalid = {"f", "l", "z", "r"};
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(invalidArguments));
+        assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(mixedArgumentsWithInvalid));
     }
 }
