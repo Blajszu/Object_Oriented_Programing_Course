@@ -6,10 +6,12 @@ public class RectangularMap extends AbstractWorldMap {
 
     private final Vector2d leftDownMapCorner = new Vector2d(0,0);
     private final Vector2d rightUpMapCorner;
+    private final Boundary boundary;
 
     public RectangularMap(int height, int width) {
 
         rightUpMapCorner = new Vector2d(width - 1, height - 1);
+        boundary = new Boundary(rightUpMapCorner, rightUpMapCorner);
     }
 
     @Override
@@ -21,6 +23,6 @@ public class RectangularMap extends AbstractWorldMap {
 
     @Override
     public Boundary getCurrentBounds() {
-        return new Boundary(leftDownMapCorner, rightUpMapCorner);
+        return boundary;
     }
 }
