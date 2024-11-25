@@ -1,6 +1,9 @@
-package agh.ics.oop.model;
+package agh.ics.oop.model.util;
 
-public class ConsoleMapDisplay implements MapChangeListener{
+import agh.ics.oop.model.MapChangeListener;
+import agh.ics.oop.model.WorldMap;
+
+public class ConsoleMapDisplay implements MapChangeListener {
 
     private int eventsCounter = 1;
 
