@@ -11,9 +11,14 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected final Map<Vector2d, Animal> animalsOnMap = new HashMap<>();
     private final MapVisualizer visualizer;
     private final List<MapChangeListener> observers = new ArrayList<>();
+    private final UUID uuid = UUID.randomUUID();
 
     public AbstractWorldMap() {
         this.visualizer = new MapVisualizer(this);
+    }
+
+    public UUID getId() {
+        return uuid;
     }
 
     public void addObserver(MapChangeListener observer) {
