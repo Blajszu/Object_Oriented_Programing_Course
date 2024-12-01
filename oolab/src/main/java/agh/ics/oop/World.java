@@ -30,7 +30,7 @@ public class World {
             }
 
             SimulationEngine engine = new SimulationEngine(simulations);
-            engine.runAsync();
+            engine.runAsyncInThreadPool();
             engine.awaitSimulationsEnd();
         }
         catch (IllegalArgumentException e) {
