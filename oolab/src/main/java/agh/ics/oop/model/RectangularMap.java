@@ -11,7 +11,7 @@ public class RectangularMap extends AbstractWorldMap {
     public RectangularMap(int height, int width) {
 
         rightUpMapCorner = new Vector2d(width - 1, height - 1);
-        boundary = new Boundary(rightUpMapCorner, rightUpMapCorner);
+        boundary = new Boundary(leftDownMapCorner, rightUpMapCorner);
     }
 
     @Override
