@@ -15,9 +15,6 @@ public class SimulationEngine {
     public SimulationEngine(List<Simulation> simulations) {
 
         this.simulations = simulations;
-        simulations.forEach(simulation -> {
-            simulationThreads.add(new Thread(simulation));
-        });
     }
 
     public void runSync() {
@@ -25,6 +22,12 @@ public class SimulationEngine {
     }
 
     public void runAsync() {
+        simulationThreads.clear();
+
+        simulations.forEach(simulation -> {
+            simulationThreads.add(new Thread(simulation));
+        });
+
         simulationThreads.forEach(Thread::start);
     }
 
