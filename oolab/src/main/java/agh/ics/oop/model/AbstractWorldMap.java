@@ -59,7 +59,9 @@ public abstract class AbstractWorldMap implements WorldMap {
             animalsOnMap.remove(oldPosition);
             animalsOnMap.put(animal.getPosition(), animal);
             mapChangeEvent("Animal moved from %s to %s ".formatted(oldPosition, animal.getPosition()));
+            return;
         }
+        mapChangeEvent("Animal turn to %s ".formatted(direction.toString()));
     }
 
     @Override
