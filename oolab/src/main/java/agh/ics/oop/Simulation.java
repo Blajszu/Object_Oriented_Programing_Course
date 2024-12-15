@@ -55,10 +55,16 @@ public class Simulation implements Runnable {
         if(numberOfAnimals == 0)
             return;
 
-        for(int i = 0; i < numberOfMoves; i++) {
-            Animal currentAnimal = animals.get(i % numberOfAnimals);
+        try {
+            for (int i = 0; i < numberOfMoves; i++) {
+                Animal currentAnimal = animals.get(i % numberOfAnimals);
 
-            worldMap.move(currentAnimal, moves.get(i));
+                worldMap.move(currentAnimal, moves.get(i));
+                Thread.sleep(500);
+            }
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace(System.err);
         }
     }
 }
