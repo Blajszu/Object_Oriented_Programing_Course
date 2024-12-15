@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.GrassField;
+import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.RectangularMap;
+import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.presenter.SimulationPresenter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class SimulationApp extends Application {
     @Override
@@ -17,6 +21,16 @@ public class SimulationApp extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("simulation.fxml"));
         BorderPane viewRoot = loader.load();
         SimulationPresenter presenter = loader.getController();
+
+        List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "f", "f", "f", "f", "f", "f", "f"});
+        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
+
+        GrassField map = new GrassField(10);
+        map.addObserver(presenter);
+        presenter.setWorldMap(map);
+
+        Simulation simulation = new Simulation(positions, directions, map);
+        simulation.run();
 
         configureStage(primaryStage, viewRoot);
         primaryStage.show();
