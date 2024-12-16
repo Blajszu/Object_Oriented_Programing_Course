@@ -64,7 +64,7 @@ public class Simulation implements Runnable {
             }
         }
         catch (InterruptedException e) {
-            e.printStackTrace(System.err);
+            System.out.println(e.getMessage());
         }
     }
 }

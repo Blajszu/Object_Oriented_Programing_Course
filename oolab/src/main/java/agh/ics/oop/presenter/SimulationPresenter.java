@@ -76,7 +76,7 @@ public class SimulationPresenter implements MapChangeListener {
         this.worldMap = worldMap;
     }
 
-    public void drawMap() {
+    private void drawMap() {
         clearGrid();
 
         currentBounds = worldMap.getCurrentBounds();
