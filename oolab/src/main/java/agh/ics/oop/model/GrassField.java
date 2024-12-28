@@ -3,6 +3,8 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.util.Boundary;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.Math.sqrt;
 
@@ -31,10 +33,7 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public Collection<WorldElement> getElements() {
-        Collection<WorldElement> result = super.getElements();
-        result.addAll(grassOnMap.values());
-
-        return result;
+        return Stream.concat(super.getElements().stream(), grassOnMap.values().stream()).toList();
     }
 
     @Override
