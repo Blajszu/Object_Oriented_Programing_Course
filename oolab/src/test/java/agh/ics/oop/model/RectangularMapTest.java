@@ -2,6 +2,8 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RectangularMapTest {
@@ -221,6 +223,30 @@ class RectangularMapTest {
 
         assertEquals(new Vector2d(2, 3), animal1.getPosition());
         assertEquals(new Vector2d(2, 2), animal2.getPosition());
+    }
+    
+    @Test
+    void testGetOrderedAnimals() {
+        //given
+        RectangularMap map = new RectangularMap(5, 5);
+        Animal animal1 = new Animal(new Vector2d(2, 2));
+        Animal animal2 = new Animal(new Vector2d(1, 1));
+        Animal animal3 = new Animal(new Vector2d(3, 3));
+    
+        try {
+            map.place(animal1);
+            map.place(animal2);
+            map.place(animal3);
+        } catch (IncorrectPositionException e) {
+            fail("Unexpected exception while placing animals: " + e.getMessage());
+        }
+    
+        //when
+        List<Animal> orderedAnimals = (List<Animal>) map.getOrderedAnimals();
+    
+        //then
+        List<Animal> expectedOrder = List.of(animal2, animal1, animal3);
+        assertEquals(expectedOrder, orderedAnimals);
     }
 
     @Test

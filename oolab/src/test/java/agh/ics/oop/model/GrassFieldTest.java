@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class GrassFieldTest {
 
     // TESTY METODY PLACE
@@ -217,6 +219,30 @@ class GrassFieldTest {
         assertEquals(new Vector2d(3, 2), animal.getPosition());
         assertEquals(animal, map.objectAt(new Vector2d(3, 2)));
         assertNull(map.objectAt(new Vector2d(2, 2)));
+    }
+
+    @Test
+    void testGetOrderedAnimals() {
+        //given
+        RectangularMap map = new RectangularMap(5, 5);
+        Animal animal1 = new Animal(new Vector2d(2, 2));
+        Animal animal2 = new Animal(new Vector2d(1, 1));
+        Animal animal3 = new Animal(new Vector2d(3, 3));
+
+        try {
+            map.place(animal1);
+            map.place(animal2);
+            map.place(animal3);
+        } catch (IncorrectPositionException e) {
+            fail("Unexpected exception while placing animals: " + e.getMessage());
+        }
+
+        //when
+        List<Animal> orderedAnimals = (List<Animal>) map.getOrderedAnimals();
+
+        //then
+        List<Animal> expectedOrder = List.of(animal2, animal1, animal3);
+        assertEquals(expectedOrder, orderedAnimals);
     }
 
     // TEST WYŚWIETLANIA MAPY

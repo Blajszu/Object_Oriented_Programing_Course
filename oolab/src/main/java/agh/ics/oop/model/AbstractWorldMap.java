@@ -87,6 +87,15 @@ public abstract class AbstractWorldMap implements WorldMap {
     public abstract Boundary getCurrentBounds();
 
     @Override
+    public Collection<Animal> getOrderedAnimals() {
+        Comparator<Animal> animalComparator = Comparator.comparing(animal -> "%s %s".formatted(animal.getPosition().getX(), animal.getPosition().getY()));
+        List<Animal> animalList = new ArrayList<>(animalsOnMap.values());
+
+        Collections.sort(animalList, animalComparator);
+        return animalList;
+    }
+
+    @Override
     public String toString() {
         Boundary currentBounds = getCurrentBounds();
         return visualizer.draw(currentBounds.lowerLeft(), currentBounds.upperRight());
