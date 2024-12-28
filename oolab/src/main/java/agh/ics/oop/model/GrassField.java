@@ -3,7 +3,6 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.util.Boundary;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.lang.Math.sqrt;
@@ -22,11 +21,11 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    public WorldElement objectAt(Vector2d position) {
+    public Optional<WorldElement> objectAt(Vector2d position) {
 
-        WorldElement animal = super.objectAt(position);
-        if(animal == null)
-            return grassOnMap.get(position);
+        Optional<WorldElement> animal = super.objectAt(position);
+        if(animal.isEmpty())
+            return Optional.ofNullable(grassOnMap.get(position));
 
         return animal;
     }

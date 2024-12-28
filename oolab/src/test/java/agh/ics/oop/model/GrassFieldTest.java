@@ -7,6 +7,7 @@ import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 class GrassFieldTest {
 
@@ -24,9 +25,15 @@ class GrassFieldTest {
             map.place(animal1);
             map.place(animal2);
 
+            Optional<WorldElement> element1 = map.objectAt(new Vector2d(2, 2));
+            Optional<WorldElement> element2 = map.objectAt(new Vector2d(1, 1));
+
             //then
-            assertEquals(animal1, map.objectAt(new Vector2d(2, 2)));
-            assertEquals(animal2, map.objectAt(new Vector2d(1, 1)));
+            if(element1.isEmpty() || element2.isEmpty()) fail("Elements should exist on the map");
+            else {
+                assertEquals(animal1, element1.get());
+                assertEquals(animal2, element2.get());
+            }
         } catch (IncorrectPositionException e) {
             fail("Unexpected exception: " + e.getMessage());
         }
@@ -60,10 +67,14 @@ class GrassFieldTest {
         //when
         try {
             map.place(animal);
+            Optional<WorldElement> element = map.objectAt(grassPosition);
 
             //then
-            assertEquals(animal, map.objectAt(grassPosition));
-            assertFalse(map.objectAt(grassPosition) instanceof Grass, "Grass should be replaced by the animal");
+            if(element.isEmpty()) fail("Element should exist on the map");
+            else {
+                assertFalse(element.get() instanceof Grass, "Grass should be replaced by the animal");
+                assertEquals(animal, element.get());
+            }
         } catch (IncorrectPositionException e) {
             fail("Unexpected exception: " + e.getMessage());
         }
@@ -178,10 +189,11 @@ class GrassFieldTest {
         Vector2d grassPosition = findGrassPosition(map, 10);
 
         //when
-        WorldElement result = map.objectAt(grassPosition);
+        Optional<WorldElement> result = map.objectAt(grassPosition);
 
         //then
-        assertInstanceOf(Grass.class, result);
+        if(result.isEmpty()) fail("Grass should exist on the map");
+            assertInstanceOf(Grass.class, result.get());
     }
 
     @Test
@@ -191,10 +203,10 @@ class GrassFieldTest {
         Vector2d freePosition = findFreePosition(map, 10);
 
         //when
-        WorldElement result = map.objectAt(freePosition);
+        Optional<WorldElement> result = map.objectAt(freePosition);
 
         //then
-        assertNull(result, "Free position should return null");
+        assertTrue(result.isEmpty(), "Position should be free");
     }
 
     // TESTY METODY MOVE
@@ -215,10 +227,13 @@ class GrassFieldTest {
         map.move(animal, MoveDirection.RIGHT);
         map.move(animal, MoveDirection.FORWARD);
 
+        Optional<WorldElement> element1 = map.objectAt(new Vector2d(3, 2));
+        Optional<WorldElement> element2 = map.objectAt(new Vector2d(2, 2));
+
         //then
         assertEquals(new Vector2d(3, 2), animal.getPosition());
-        assertEquals(animal, map.objectAt(new Vector2d(3, 2)));
-        assertNull(map.objectAt(new Vector2d(2, 2)));
+        element1.ifPresent(worldElement -> assertEquals(animal, worldElement));
+        assertTrue(element2.isEmpty());
     }
 
     @Test
@@ -267,7 +282,8 @@ class GrassFieldTest {
         for (int x = 0; x < sqrt(n*10); x++) {
             for (int y = 0; y < sqrt(n*10); y++) {
                 Vector2d position = new Vector2d(x, y);
-                if (map.objectAt(position) instanceof Grass) {
+                Optional<WorldElement> element = map.objectAt(position);
+                if (element.isPresent() && element.get() instanceof Grass) {
                     return position;
                 }
             }
@@ -279,7 +295,8 @@ class GrassFieldTest {
         for (int x = 0; x < sqrt(n*10); x++) {
             for (int y = 0; y < sqrt(n*10); y++) {
                 Vector2d position = new Vector2d(x, y);
-                if (map.objectAt(position) == null) {
+                Optional<WorldElement> element = map.objectAt(position);
+                if (element.isEmpty()) {
                     return position;
                 }
             }

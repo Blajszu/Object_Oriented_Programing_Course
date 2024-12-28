@@ -3,6 +3,7 @@ import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,9 +23,15 @@ class RectangularMapTest {
             map.place(animal1);
             map.place(animal2);
 
+            Optional<WorldElement> element1 = map.objectAt(new Vector2d(2, 2));
+            Optional<WorldElement> element2 = map.objectAt(new Vector2d(1, 1));
+
             //then
-            assertEquals(animal1, map.objectAt(new Vector2d(2, 2)));
-            assertEquals(animal2, map.objectAt(new Vector2d(1, 1)));
+
+            if(element1.isPresent() && element2.isPresent()) {
+                assertEquals(animal1, element1.get());
+                assertEquals(animal2, element2.get());
+            }
         } catch (IncorrectPositionException e) {
             fail("Unexpected exception: " + e.getMessage());
         }
@@ -142,10 +149,10 @@ class RectangularMapTest {
         }
 
         //when
-        WorldElement result = map.objectAt(new Vector2d(2, 2));
+        Optional<WorldElement> result = map.objectAt(new Vector2d(2, 2));
 
         //then
-        assertEquals(animal1, result);
+        result.ifPresent(worldElement -> assertEquals(animal1, worldElement));
     }
 
     @Test
@@ -154,10 +161,10 @@ class RectangularMapTest {
         RectangularMap map = new RectangularMap(5, 5);
 
         //when
-        WorldElement result = map.objectAt(new Vector2d(4, 4));
+        Optional<WorldElement> result = map.objectAt(new Vector2d(4, 4));
 
         //then
-        assertNull(result);
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -177,9 +184,11 @@ class RectangularMapTest {
         map.move(animal1, MoveDirection.FORWARD);
 
         //then
+        Optional<WorldElement> element = map.objectAt(new Vector2d(3, 2));
+
         assertEquals(new Vector2d(3, 2), animal1.getPosition());
-        assertEquals(animal1, map.objectAt(new Vector2d(3, 2)));
-        assertNull(map.objectAt(new Vector2d(2, 2)));
+        element.ifPresent(worldElement -> assertEquals(animal1, worldElement));
+        assertTrue(map.objectAt(new Vector2d(2, 2)).isEmpty());
     }
 
     @Test
