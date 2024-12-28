@@ -1,22 +1,21 @@
 package agh.ics.oop.presenter;
 
-import agh.ics.oop.OptionsParser;
-import agh.ics.oop.Simulation;
-import agh.ics.oop.SimulationEngine;
-import agh.ics.oop.model.*;
+import agh.ics.oop.model.MapChangeListener;
+import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.WorldElement;
+import agh.ics.oop.model.WorldMap;
 import agh.ics.oop.model.util.Boundary;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import java.util.List;
 
-public class SimulationPresenter implements MapChangeListener {
+public class SimulationRunPresenter implements MapChangeListener {
 
     private final int CELL_WIDTH = 38;
     private final int CELL_HEIGHT = 38;
@@ -27,11 +26,11 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private Label moveLabel;
     @FXML
-    private TextField moveList;
-    @FXML
     public GridPane mapGrid;
 
     private void clearGrid() {
+        if(mapGrid.getChildren().isEmpty()) return;
+
         mapGrid.getChildren().retainAll(mapGrid.getChildren().getFirst()); // hack to retain visible grid lines
         mapGrid.getColumnConstraints().clear();
         mapGrid.getRowConstraints().clear();
@@ -94,25 +93,5 @@ public class SimulationPresenter implements MapChangeListener {
             drawMap();
             moveLabel.setText(message);
         });
-    }
-
-    public void onSimulationStartClicked() {
-        mapGrid.setGridLinesVisible(true);
-
-        try {
-            GrassField map = new GrassField(10);
-            this.setWorldMap(map);
-            map.addObserver(this);
-
-            List<MoveDirection> directions = OptionsParser.parse(moveList.getText().split(" "));
-            List<Vector2d> positions = List.of(new Vector2d(0, 0), new Vector2d(2, 2));
-
-            Simulation simulation = new Simulation(positions, directions, worldMap);
-            SimulationEngine engine = new SimulationEngine(List.of(simulation));
-            engine.runAsync();
-        }
-        catch (IllegalArgumentException e) {
-            moveLabel.setText(e.getMessage());
-        }
     }
 }
