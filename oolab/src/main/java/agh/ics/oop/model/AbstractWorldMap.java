@@ -89,10 +89,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     @Override
     public Collection<Animal> getOrderedAnimals() {
         Comparator<Animal> animalComparator = Comparator.comparing(animal -> "%s %s".formatted(animal.getPosition().getX(), animal.getPosition().getY()));
-        List<Animal> animalList = new ArrayList<>(animalsOnMap.values());
-
-        Collections.sort(animalList, animalComparator);
-        return animalList;
+        return animalsOnMap.values().stream().sorted(animalComparator).toList();
     }
 
     @Override
