@@ -15,6 +15,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SimulationStartPresenter {
@@ -44,7 +47,16 @@ public class SimulationStartPresenter {
 
             GrassField map = new GrassField(10);
             simulationRunPresenter.setWorldMap(map);
+
             map.addObserver(simulationRunPresenter);
+            map.addObserver((worldMap, message) -> {
+                LocalTime localTime = LocalTime.now();
+
+                String time = localTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+                LocalDate date = LocalDate.now();
+
+                System.out.printf("%s %s %s%n", date, time, message);
+            });
 
             List<MoveDirection> directions = OptionsParser.parse(moveList.getText().split(" "));
             List<Vector2d> positions = List.of(new Vector2d(0, 0), new Vector2d(2, 2));
