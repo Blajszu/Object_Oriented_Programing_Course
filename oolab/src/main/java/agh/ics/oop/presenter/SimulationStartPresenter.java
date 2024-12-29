@@ -6,6 +6,7 @@ import agh.ics.oop.SimulationEngine;
 import agh.ics.oop.model.GrassField;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.util.FileMapDisplay;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -49,6 +50,7 @@ public class SimulationStartPresenter {
             simulationRunPresenter.setWorldMap(map);
 
             map.addObserver(simulationRunPresenter);
+            map.addObserver(new FileMapDisplay());
             map.addObserver((worldMap, message) -> {
                 LocalTime localTime = LocalTime.now();
 
