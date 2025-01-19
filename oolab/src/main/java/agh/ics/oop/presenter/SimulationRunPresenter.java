@@ -1,5 +1,6 @@
 package agh.ics.oop.presenter;
 
+import agh.ics.oop.WorldElementBox;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.util.Boundary;
 import javafx.application.Platform;

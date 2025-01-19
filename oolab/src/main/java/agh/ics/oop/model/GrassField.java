@@ -24,10 +24,7 @@ public class GrassField extends AbstractWorldMap {
     public Optional<WorldElement> objectAt(Vector2d position) {
 
         Optional<WorldElement> animal = super.objectAt(position);
-        if(animal.isEmpty())
-            return Optional.ofNullable(grassOnMap.get(position));
-
-        return animal;
+        return Optional.of(animal.orElse(grassOnMap.get(position)));
     }
 
     @Override

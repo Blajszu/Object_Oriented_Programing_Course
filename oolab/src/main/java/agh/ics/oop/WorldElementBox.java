@@ -1,5 +1,6 @@
-package agh.ics.oop.model;
+package agh.ics.oop;
 
+import agh.ics.oop.model.WorldElement;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
