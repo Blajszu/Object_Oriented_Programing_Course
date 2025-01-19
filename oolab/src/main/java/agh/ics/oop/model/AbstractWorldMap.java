@@ -66,12 +66,12 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        return objectAt(position) != null;
+        return objectAt(position).isPresent();
     }
 
     @Override
-    public WorldElement objectAt(Vector2d position) {
-        return animalsOnMap.get(position);
+    public Optional<WorldElement> objectAt(Vector2d position) {
+        return Optional.ofNullable(animalsOnMap.get(position));
     }
 
     @Override
@@ -85,6 +85,15 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     public abstract Boundary getCurrentBounds();
+
+    @Override
+    public Collection<Animal> getOrderedAnimals() {
+        return animalsOnMap.values().stream()
+                .sorted(Comparator
+                        .<Animal>comparingInt(animal -> animal.getPosition().getX())
+                        .thenComparingInt(animal -> animal.getPosition().getY()))
+                .toList();
+    }
 
     @Override
     public String toString() {

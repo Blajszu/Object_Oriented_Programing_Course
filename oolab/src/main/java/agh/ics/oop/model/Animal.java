@@ -1,9 +1,6 @@
 package agh.ics.oop.model;
 
 public class Animal implements WorldElement {
-    private static final Vector2d LEFT_DOWN_MAP_CORNER = new Vector2d(0,0);
-    private static final Vector2d RIGHT_UP_MAP_CORNER = new Vector2d(4,4);
-    
     private MapDirection currentOrientation;
     private Vector2d currentPosition;
 
@@ -22,6 +19,21 @@ public class Animal implements WorldElement {
 
     public Vector2d getPosition() {
         return currentPosition;
+    }
+
+    @Override
+    public String getResourceName() {
+        return "Z %s".formatted(currentPosition.toString());
+    }
+
+    @Override
+    public String getResourceFileName() {
+        return switch (currentOrientation) {
+            case NORTH -> "up.png";
+            case SOUTH -> "down.png";
+            case EAST -> "right.png";
+            case WEST -> "left.png";
+        };
     }
 
     @Override

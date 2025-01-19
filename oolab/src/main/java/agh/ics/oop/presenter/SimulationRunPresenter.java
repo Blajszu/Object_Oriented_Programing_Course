@@ -1,37 +1,37 @@
 package agh.ics.oop.presenter;
 
-import agh.ics.oop.OptionsParser;
-import agh.ics.oop.Simulation;
-import agh.ics.oop.SimulationEngine;
+import agh.ics.oop.WorldElementBox;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.util.Boundary;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-public class SimulationPresenter implements MapChangeListener {
+public class SimulationRunPresenter implements MapChangeListener {
 
-    private final int CELL_WIDTH = 38;
-    private final int CELL_HEIGHT = 38;
+    private final int CELL_WIDTH = 55;
+    private final int CELL_HEIGHT = 55;
 
     private WorldMap worldMap;
     private Boundary currentBounds;
+    private List<WorldElementBox> grassBoxes;
+    private List<WorldElementBox> animalBoxes;
 
     @FXML
     private Label moveLabel;
     @FXML
-    private TextField moveList;
-    @FXML
     public GridPane mapGrid;
 
     private void clearGrid() {
+        if(mapGrid.getChildren().isEmpty()) return;
+
         mapGrid.getChildren().retainAll(mapGrid.getChildren().getFirst()); // hack to retain visible grid lines
         mapGrid.getColumnConstraints().clear();
         mapGrid.getRowConstraints().clear();
@@ -60,13 +60,18 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     private void addWorldElements() {
-        List<WorldElement> worldElements = (List<WorldElement>) worldMap.getElements();
 
-        worldElements.forEach(worldElement -> {
-            Label worldElementLabel = new Label(worldElement.toString());
-            GridPane.setHalignment(worldElementLabel, HPos.CENTER);
-            Vector2d position = worldElement.getPosition();
-            mapGrid.add(worldElementLabel,
+        List<WorldElementBox> worldElementBoxes;
+        animalBoxes.forEach(WorldElementBox::update);
+
+        if(worldMap instanceof GrassField)
+            worldElementBoxes = Stream.concat(grassBoxes.stream(), animalBoxes.stream()).toList();
+        else
+            worldElementBoxes = animalBoxes;
+
+        worldElementBoxes.forEach(worldElementBox -> {
+            Vector2d position = worldElementBox.getElement().getPosition();
+            mapGrid.add(worldElementBox.getGraphicBox(),
                     position.getX() + 1 - currentBounds.lowerLeft().getX(),
                     currentBounds.upperRight().getY() - position.getY() + 1);
         });
@@ -77,8 +82,16 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     private void drawMap() {
-        clearGrid();
+        if(grassBoxes == null && worldMap instanceof GrassField)
+            grassBoxes = worldMap.getElements().stream()
+                .filter(worldElement -> worldElement instanceof Grass)
+                .map(WorldElementBox::new)
+                .toList();
 
+        if(animalBoxes == null)
+            animalBoxes = worldMap.getOrderedAnimals().stream().map(WorldElementBox::new).toList();
+
+        clearGrid();
         currentBounds = worldMap.getCurrentBounds();
         int mapHeight = currentBounds.upperRight().getY() - currentBounds.lowerLeft().getY();
         int mapWidth = currentBounds.upperRight().getX() - currentBounds.lowerLeft().getX();
@@ -94,25 +107,5 @@ public class SimulationPresenter implements MapChangeListener {
             drawMap();
             moveLabel.setText(message);
         });
-    }
-
-    public void onSimulationStartClicked() {
-        mapGrid.setGridLinesVisible(true);
-
-        try {
-            GrassField map = new GrassField(10);
-            this.setWorldMap(map);
-            map.addObserver(this);
-
-            List<MoveDirection> directions = OptionsParser.parse(moveList.getText().split(" "));
-            List<Vector2d> positions = List.of(new Vector2d(0, 0), new Vector2d(2, 2));
-
-            Simulation simulation = new Simulation(positions, directions, worldMap);
-            SimulationEngine engine = new SimulationEngine(List.of(simulation));
-            engine.runAsync();
-        }
-        catch (IllegalArgumentException e) {
-            moveLabel.setText(e.getMessage());
-        }
     }
 }
