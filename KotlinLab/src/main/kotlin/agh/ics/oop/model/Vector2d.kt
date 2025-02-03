@@ -12,9 +12,8 @@ data class Vector2d(val x: Int, val y: Int) {
     operator fun minus(other: Vector2d) = Vector2d(x - other.x, y - other.y)
 
     operator fun compareTo(other: Vector2d) = when {
-        this.follows(other) && this.precedes(other) -> 0
-        this.follows(other) -> 1
-        else -> -1
+        x != other.x -> x - other.x  // najpierw porównujemy x
+        else -> y - other.y          // jeśli x są równe, porównujemy y
     }
 
     fun precedes(other: Vector2d) = x <= other.x && y <= other.y
