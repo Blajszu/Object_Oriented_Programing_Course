@@ -9,7 +9,7 @@ Najważniejsze zadania:
 3. Zapoznanie się z kolekcjami w Javie, na przykładzie list.
 4. Testy integracyjne.
 
-## Zadania do wykonania (4xp)
+## Zadania do wykonania
 
 ### Model `Animal`
 

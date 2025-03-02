@@ -8,7 +8,7 @@ Najważniejsze zadania:
 2. Stworzenie klasy `MapDirection`.
 3. Testy jednostkowe.
 
-## Zadania do wykonania (4xp)
+## Zadania do wykonania
 
 Uwaga: dla przejrzystości pliki z klasami `Vector2d` oraz `MapDirection` należy umieścić w pakiecie `agh.ics.oop.model`.
 
@@ -39,7 +39,7 @@ Uwaga: dla przejrzystości pliki z klasami `Vector2d` oraz `MapDirection` należ
 
 2. Poniższy obrazek ilustruje metody `precedes` i `follows`. `v1` poprzedza (precedes) `v2` oraz `v3`. `v2` poprzedza `v3`.
    Wszystkie wektory poprzedzają również same siebie (relacja ta jest zwrotna). `v3` następuje po (follows) `v2` oraz
-   `v1`, `v2` następuje po `v1`. Wszystkie wektory następują również po samych sobie.
+   `v1`, `v2` następuje po `v1`. Wszystkie wektory następują również po samych sobie.<br>
    ![wektory](vector2d.png)
 
 3. Poniższy obrazek ilustruje metody `lowerLeft` oraz `upperRight`.

@@ -8,7 +8,7 @@ Głównym zadaniem będzie stworzenie (bardzo) uproszczonej wersji mapy zwierzą
 
 ## Zadania do wykonania
 
-### Część I: Elementy języka Kotlin (<img src="../img/reward_silver.png" alt="srebrna skrzynka" width="50" align="center" />)
+### Część I: Elementy języka Kotlin
 
 1. Stwórz nowy projekt w IntelliJ: *File -> New --> Project... -->* wpisz nazwę, zaznacz *Kotlin* jako język oraz *Gradle* jako *Build system*, a także *Groovy* jako *Gradle DSL*.
 
@@ -48,7 +48,7 @@ Głównym zadaniem będzie stworzenie (bardzo) uproszczonej wersji mapy zwierzą
        **Uwaga:** W Kotlinie istnieje już *extension function* `random()` oraz `randomOrNull()` dla np. listy lub zbioru liczb - można z niej tu skorzystać. 
      - `randomFreePostion(mapSize: Vector2d)` - działa na każdej mapie (klasie `Map`), której kluczami są obiekty `Vector2d` i zwraca losową wolną pozycję, zakładając że mapa jest prostokątna, a jej rozmiar ograniczony przez `mapSize`. Jeśli nie ma już wolnej pozycji, zwraca `null`.
 
-### Część II: Testy z zastosowaniem biblioteki Kotest (<img src="../img/reward_silver.png" alt="srebrna skrzynka" width="50" align="center" />)
+### Część II: Testy z zastosowaniem biblioteki Kotest
 
 Napisz kilka testów sprawdzających działanie `BouncyMap`. W tym celu wykorzystaj bibliotekę [Kotest](https://kotest.io). Dodaj do konfiguracji `build.gradle` zależności:
 ```
@@ -62,7 +62,6 @@ Zapoznaj się ze [stylami testowania](https://kotest.io/docs/framework/testing-s
 
 ## Przydatne informacje
 
-- [**Kod z przykładami Java vs Kotlin**](kotlin-examples.zip) **(Wersja z uzupełnionymi rozwiązaniami przykładów jest [tutaj](kotlin-examples-solved.zip))**.
 - [Oficjalna dokumentacja Kotlina](https://kotlinlang.org/docs/home.html) (jest serio dobra i często pokrywa wszelkie wątpliwości)
 - [Kotlin Koans](https://play.kotlinlang.org/koans/overview) - tutorial w formie serii interaktywnych ćwiczeń
 

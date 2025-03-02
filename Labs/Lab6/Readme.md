@@ -12,7 +12,7 @@ Najważniejsze zadania:
 
 
 
-## Zadania do wykonania (4xp)
+## Zadania do wykonania
 
 ### Obsługa błędów
 

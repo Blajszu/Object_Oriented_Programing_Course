@@ -9,7 +9,7 @@ Najważniejsze zadania:
 1. Zastosowanie puli wątków do efektywnego zarządzania symulacjami.
 
 
-## Zadania do wykonania (4xp)
+## Zadania do wykonania
 
 ### Uruchamianie wielu symulacji synchronicznie
 

@@ -12,7 +12,7 @@ Git jest rozproszonym systemem wersjonowania pracy. Jego najważniejsze cechy to
 * możliwość pracy w gałęziach ("branchach")
 * brak centralnego repozytorium kodu (repozytorium rozproszone), co pozwala na lokalne wersjonowanie kodu bez wysyłania go na serwer
 
-## Zadania do wykonania (4xp)
+## Zadania do wykonania
 
 Do wykonania wszystkich ćwiczeń na tym laboratorium potrzebne będą **jedynie zainstalowany Git oraz terminal**. Jeśli nie jesteś fanem pracy z samą konsolą warto zaopatrzyć się też w aplikację z GUI do obsługi Git:
 
